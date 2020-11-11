@@ -1,6 +1,3 @@
-Hello and welcome to this blog. I'm still working out what to put here.
+Hello and welcome to my personal blog. Currently I'm a senior computer science student at the Federal University of Para in Brazil. I do research involving a mix of artificial intelligence and software engineering, our goal is to detect flaky tests using some models such as Naive Bayes and SVMs. My goal with this blog is to share some ideas that I think are interesting, most of them will probably be something I read on some books, it may vary from computer science, physics, astronomy, biology, economics, psychology etc. Nature is not divided as our educational system may indicate, so all of this can come together eventually. 
 
 
-## Interests
-
-Mainly non-fiction books, AI and some newbie physics/biology. 
