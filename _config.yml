@@ -6,7 +6,7 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: Aian's blog.
+title: Aian Shay
 description: dont know yet, sorry.
 github_username: aianshay
 
@@ -16,7 +16,7 @@ twitter_username: aianshay
 instagram_username: aianshay
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math: true
 
 # Everything below here can be ignored, unless you want to change the theme entirely
 theme: minima
