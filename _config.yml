@@ -11,7 +11,7 @@ description: dont know yet, sorry.
 github_username: aianshay
 
 # Email and twitter are optional:
-email: 
+email: email@aian.me
 twitter_username: aianshay
 instagram_username: aianshay
 
@@ -19,7 +19,7 @@ instagram_username: aianshay
 use_math: true
 
 # Everything below here can be ignored, unless you want to change the theme entirely
-theme: jekyll-theme-cayman
+theme: minima
 plugins:
   - jekyll-feed
   - jekyll-octicons
