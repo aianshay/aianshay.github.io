@@ -7,13 +7,14 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 title: Aian Shay
-description: dont know yet, sorry.
+description: Home
 github_username: aianshay
 
 # Email and twitter are optional:
 email: email@aian.me
 twitter_username: aianshay
 instagram_username: aianshay
+linkedin_username: aian
 
 # Set this to true to get LaTeX math equation support
 use_math: true
