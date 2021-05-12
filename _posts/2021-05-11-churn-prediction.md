@@ -362,7 +362,7 @@ Number of active days and number of sessions were the most important features fo
 
 ## Bonus
 
-If you want to check out how I analyzed the data, a notebook is available [here][https://github.com/aianshay/data-science-portifolio/tree/main/churn-prediction-with-spark]. 
+If you want to check out how I analyzed the data, a notebook is available [here](https://github.com/aianshay/data-science-portifolio/tree/main/churn-prediction-with-spark). 
 
 ## Acknowledgments
 
