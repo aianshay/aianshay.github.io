@@ -1,6 +1,8 @@
 # Churn Prediction with Spark
 
-Churn is defined as the event when a user leaves or unsubscribes from a service. Predicting this event is already an important part of businesses as Netflix, Spotify and YouTube. When predicting this event, companies can offer incetives so the user doesn't leave the plataform, potentially saving a lot of money. Other than thar, it's also an opportunity of understanding why users are leaving the product, and which improvements can be made.
+![Image](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/customer.png)
+
+Churn is defined as the event when a user leaves or unsubscribes from a service. Predicting this event is already an important part of businesses as Netflix, Spotify and YouTube. When predicting this event, companies can offer incetives so the user doesn't leave the plataform, potentially saving a lot of money. Other than that, it's also an opportunity of understanding why users are leaving the product, and which improvements can be made.
 
 In this case, I'll be using pySpark, a Python API for manipulating distributed datasets and creating machine learning models. With it, it's easier to handle datasets that don't easily fit into memory. 
 
@@ -351,11 +353,17 @@ The F1 score of each model was:
 |  GBT   |      0.705     |      
 
 
-Random Forest was had the highest score, so I did hyperparameter tuning on this one as follows.
+Random Forest had the highest score, so I went futher to investigate its feature importances:
 
 
-### Hyperparameter Tuning
+![Importances](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/importances.png)
 
+Number of active days and number of sessions were the most important features for predicting churning. While listening time and number of thumbs down had a similar and significance. 
 
+## Bonus
 
+If you want to check out how I analyzed the data, a notebook is available [here][https://github.com/aianshay/data-science-portifolio/tree/main/churn-prediction-with-spark]. 
 
+## Acknowledgments
+
+Thanks to this Udacity for providing the dataset.
