@@ -28,11 +28,11 @@ df.createOrReplaceTempView('sparkify_data')
 
 First let's have a glimpse of the dataset:
 
-![Dataset](images/data.png)
+![Dataset](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/data.png)
 
 Indeed, each line indicates one user behavior, where it's possible to see **which page the user was at**, if he was listening to any music, gender, id of the session, user name etc. Now let's check all the columns and it's types.
 
-![Columns](images/columns.png)
+![Columns](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/columns.png)
 
 The number of lines can be easily obtained with the `count()` function: 
 
@@ -50,7 +50,7 @@ It would be interesting if we had the number of unique users:
 spark.sql("""select count (distinct userId) from sparkify_data""").show()
 ```
 
-![Unique users](images/unique_users.png)
+![Unique users](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/unique_users.png)
 
 
 Let's check how frequent each user is in the dataset with the following query:
@@ -62,7 +62,7 @@ spark.sql("""select userId, count(userId) as count
              order by count desc""").show()
 ```
 
-![Users count](images/users_count.png)
+![Users count](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/users_count.png)
 
 Looks like we got a Null value that happens 8346 times. I'll investigate this later.
 
@@ -77,7 +77,7 @@ spark.sql("""select page, count(page) as count
              order by count desc""").toPandas()
 ```
 
-![Pages](images/pages.png)
+![Pages](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/pages.png)
 
 From this I can draw some conclusions:
 
@@ -95,7 +95,7 @@ What about free/paid users?
 df.groupBy('level').count().show()
 ```
 
-![Level](images/level.png)
+![Level](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/level.png)
 
 There are almost 4x more paid users than free users. 
 
@@ -108,11 +108,9 @@ What about gender proportions?
 df.groupBy('gender').count().show()
 ```
 
-![Gender](images/gender.png)
-
 
 <p align="center">
-  <img src="images/gender.png">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/gender.png">
 </p>
 
 There are 8346 Null values in the gender column, the same value we found in the `userId` column. This probably refers to users that don't have an account in the app. These values will be dropped later in the feature engineering part.
@@ -151,7 +149,7 @@ listening_time = spark.sql("""select userId, sum(length) as listening_time
                               group by userId""")
 ```
 
-![Listening time](images/listening.png)
+![Listening time](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/listening.png)
 
 
 ### Active days 
@@ -197,7 +195,7 @@ active_days = udf(compute_active_days, IntegerType())
 active = active.withColumn("active_days", active_days(active.created, active.last_session))
 ```
 
-![Active days](images/active_days.png)
+![Active days](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/active_days.png)
 
 
 ### Number of sessions
@@ -208,7 +206,7 @@ sessions = spark.sql("""select userId, count(distinct sessionId) as sessions
                         group by userId""")
 ```
 
-![Sessions](images/sessions.png)
+![Sessions](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/sessions.png)
 
 ### Number of listened songs
 
@@ -218,7 +216,7 @@ songs = spark.sql("""select userId, count(Song) as total_songs
                      group by userId""")
 ```
 
-![Songs](images/songs.png)
+![Songs](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/songs.png)
 
 ### Number of thumbs up
 
@@ -229,7 +227,7 @@ thumbs_up = spark.sql("""select userId, count(page) as thumbs_up
                          group by userId""")
 ```
 
-![Thumbs up](images/thumbs_up.png)
+![Thumbs up](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_up.png)
 
 ### Number of thumbs down
 
@@ -240,7 +238,7 @@ thumbs_down = spark.sql("""select userId, count(page) as thumbs_down
                            group by userId""")
 ```
 
-![Thumbs down](images/thumbs_down.png)
+![Thumbs down](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_down.png)
 
 ### Number of added friends
 
@@ -251,7 +249,7 @@ friends = spark.sql("""select userId, count(page) as friends
                        group by userId""")
 ```
 
-![Friends](images/friends.png)
+![Friends](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/friends.png)
 
 ### Churn flag
 
@@ -270,7 +268,7 @@ spark.sql("""select churn_flag, count(churn_flag)
           group by churn_flag""").show()
 ```
 
-![Churn](images/churn.png)
+![Churn](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/churn.png)
 
 From the image above, we can see that there are only 52 churns. As there are so few churns, in the modeling part, using F1 score for model evaluation is more suitable.
 
@@ -290,7 +288,7 @@ user_data = listening_time.join(thumbs_up, on='userId', how='outer')\
 
 Then we get:
 
-![Full data](images/full_data.png)
+![Full data](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/full_data.png)
 
 ### Filling missing values
 
@@ -306,7 +304,7 @@ full_df = user_data.drop('created').drop('last_session').fillna(0)
 
 Which outputs as a result:
 
-![Filled data](images/filled_data.png)
+![Filled data](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/filled_data.png)
 
 Yay! Now the data is finally ready to train some models.
 
