@@ -1,18 +1,13 @@
 # Churn Prediction with Spark
 
-![Image](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/customer.png)
 
-## Problem definition
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/customer.png">
+</p>
 
 Churn is defined as the event when a user leaves or unsubscribes from a service. Predicting this event is already an important part of businesses as Netflix, Spotify and YouTube. When predicting this event, companies can offer incetives so the user doesn't leave the plataform, potentially saving a lot of money. Other than that, it's also an opportunity of understanding why users are leaving the product, and which improvements can be made.
 
-## Strategy to solve the problem
-
 In this case, I'll be using pySpark, a Python API for manipulating distributed datasets and creating machine learning models. In this case, I will create a classification model that will predict if a user churned or not. With Spark, it's easier to handle datasets that don't easily fit into memory. 
-
-## Metrics
-
-As it is a classification problem, initially the accuracy will be considerd to evaluate those models. If in the exploratory data analysis process I find that the classes are unbalanced, then F1 score will be more suitable. 
 
 ## The Dataset
 
@@ -38,11 +33,18 @@ df.createOrReplaceTempView('sparkify_data')
 
 First let's have a glimpse of the dataset:
 
-![Dataset](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/data.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/data.png">
+</p>
+
 
 Indeed, each line indicates one user behavior, where it's possible to see **which page the user was at**, if he was listening to any music, gender, id of the session, user name etc. Now let's check all the columns and it's types.
 
-![Columns](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/columns.png)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/columns.png">
+</p>
+
 
 The number of lines can be easily obtained with the `count()` function: 
 
@@ -60,7 +62,11 @@ It would be interesting if we had the number of unique users:
 spark.sql("""select count (distinct userId) from sparkify_data""").show()
 ```
 
-![Unique users](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/unique_users.png)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/unique_users.png">
+</p>
+
 
 There are 226 unique users in the dataset.
 
@@ -74,7 +80,9 @@ spark.sql("""select userId, count(userId) as count
              order by count desc""").show()
 ```
 
-![Users count](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/users_count.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/users_count.png">
+</p>
 
 Looks like we got a Null value that happens 8346 times. I'll investigate this later.
 
@@ -89,7 +97,10 @@ spark.sql("""select page, count(page) as count
              order by count desc""").toPandas()
 ```
 
-![Pages](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/pages.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/pages.png">
+</p>
+
 
 From this I can draw some conclusions:
 
@@ -107,7 +118,10 @@ What about free/paid users?
 df.groupBy('level').count().show()
 ```
 
-![Level](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/level.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/level.png">
+</p>
+
 
 There are almost 4x more paid users than free users. 
 
@@ -161,7 +175,9 @@ listening_time = spark.sql("""select userId, sum(length) as listening_time
                               group by userId""")
 ```
 
-![Listening time](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/listening.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/listening.png">
+</p>
 
 
 ### Active days 
@@ -207,7 +223,9 @@ active_days = udf(compute_active_days, IntegerType())
 active = active.withColumn("active_days", active_days(active.created, active.last_session))
 ```
 
-![Active days](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/active_days.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/active_days.png">
+</p>
 
 
 ### Number of sessions
@@ -218,7 +236,10 @@ sessions = spark.sql("""select userId, count(distinct sessionId) as sessions
                         group by userId""")
 ```
 
-![Sessions](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/sessions.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/sessions.png">
+</p>
+
 
 ### Number of listened songs
 
@@ -228,7 +249,10 @@ songs = spark.sql("""select userId, count(Song) as total_songs
                      group by userId""")
 ```
 
-![Songs](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/songs.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/songs.png">
+</p>
+
 
 ### Number of thumbs up
 
@@ -239,7 +263,10 @@ thumbs_up = spark.sql("""select userId, count(page) as thumbs_up
                          group by userId""")
 ```
 
-![Thumbs up](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_up.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_up.png">
+</p>
+
 
 ### Number of thumbs down
 
@@ -250,7 +277,10 @@ thumbs_down = spark.sql("""select userId, count(page) as thumbs_down
                            group by userId""")
 ```
 
-![Thumbs down](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_down.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/thumbs_down.png">
+</p>
+
 
 ### Number of added friends
 
@@ -261,7 +291,10 @@ friends = spark.sql("""select userId, count(page) as friends
                        group by userId""")
 ```
 
-![Friends](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/friends.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/friends.png">
+</p>
+
 
 ### Churn flag
 
@@ -280,7 +313,9 @@ spark.sql("""select churn_flag, count(churn_flag)
           group by churn_flag""").show()
 ```
 
-![Churn](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/churn.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/churn.png">
+</p>
 
 From the image above, we can see that there are only 52 churns. As there are so few churns, in the modeling part, using F1 score for model evaluation is more suitable.
 
@@ -300,7 +335,10 @@ user_data = listening_time.join(thumbs_up, on='userId', how='outer')\
 
 Then we get:
 
-![Full data](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/full_data.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/full_data.png">
+</p>
+
 
 ### Filling missing values
 
@@ -316,7 +354,9 @@ full_df = user_data.drop('created').drop('last_session').fillna(0)
 
 Which outputs as a result:
 
-![Filled data](https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/filled_data.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aianshay/aianshay.github.io/master/_posts/images/filled_data.png">
+</p>
 
 Yay! Now the data is finally ready to train some models.
 
